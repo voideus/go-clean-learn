@@ -28,3 +28,7 @@ func (t *User) BeforeCreate(tx *gorm.DB) error {
 	t.ID = lib.BinaryUUID(id)
 	return err
 }
+
+func (u User) TableName() string {
+	return "users"
+}

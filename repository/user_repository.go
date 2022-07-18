@@ -3,6 +3,7 @@ package repository
 import (
 	"clean-architecture/infrastructure"
 	"clean-architecture/lib"
+	"clean-architecture/models"
 
 	"gorm.io/gorm"
 )
@@ -25,4 +26,8 @@ func (r UserRepository) WithTrx(trxHandle *gorm.DB) UserRepository {
 		r.Database.DB = trxHandle
 	}
 	return r
+}
+
+func (r UserRepository) FindAll() (users []models.User, err error) {
+	return users
 }

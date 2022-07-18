@@ -25,9 +25,10 @@ func NewMigrations(
 
 // Migrate migrates all migrations that are defined
 func (m Migrations) Migrate() error {
+	m.logger.Info("migrating ...")
 
 	migrations := &migrate.FileMigrationSource{
-		Dir: "migration/",
+		Dir: "migration/sqlite3",
 	}
 
 	sqlDB, err := m.db.DB.DB()
@@ -36,7 +37,7 @@ func (m Migrations) Migrate() error {
 	}
 
 	m.logger.Info("running migration.")
-	_, err = migrate.Exec(sqlDB, "mysql", migrations, migrate.Up)
+	_, err = migrate.Exec(sqlDB, "sqlite3", migrations, migrate.Up)
 	if err != nil {
 		return err
 	}

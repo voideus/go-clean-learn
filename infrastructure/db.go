@@ -45,13 +45,13 @@ func NewDatabase(logger lib.Logger, env *lib.Env) Database {
 	// }
 	logger.Info("database connection established")
 
-	// database := Database{DB: db}
+	database := Database{DB: db}
 	// logger.Info("currentDatabase:", db.Migrator().CurrentDatabase())
 
-	// if err := RunMigration(logger, database); err != nil {
-	// 	logger.Info("migration failed.")
-	// 	logger.Panic(err)
-	// }
+	if err := RunMigration(logger, database); err != nil {
+		logger.Info("migration failed.")
+		logger.Panic(err)
+	}
 
 	return Database{DB: db}
 }
